@@ -179,7 +179,11 @@ func formatMsg(html string) (string, error) {
 	for _, v := range html {
 		if unicode.Is(unicode.Cyrillic, v) ||
 			unicode.Is(unicode.Digit, v) ||
-			v == ':' || v == ' ' || v == ',' || v == '\n' {
+			v == ':' ||
+			v == ' ' ||
+			v == ',' ||
+			v == '\n' ||
+			v == '.' {
 			_, err := b.WriteRune(v)
 			if err != nil {
 				return "", err
