@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"find_qty/m"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -149,7 +150,10 @@ func getNameAndID(inputID string, client *http.Client) (string, string, error) {
 
 	if len(response.Products) > 0 {
 		product := response.Products[0]
-		return product.Name, product.ID, nil
+		name := product.Name + "\n"
+		price := product.Price + "\n"
+		prodInfo := fmt.Sprintf("%s\nЦена - %s", name, price)
+		return prodInfo, product.ID, nil
 	}
 
 	return "", "", errors.New("not found ID")
